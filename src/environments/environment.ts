@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api_url : 'https://api.nytimes.com/svc/movies/v2/reviews/',
+  api_key : 'vEl2CDg5YuwKS9Mx8D44m4FKJM4nceXJ'
 };
 
 /*
