@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { FormsModule } from '@angular/forms';
 import { AllMoviesComponent } from './all-movies/all-movies.component';
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import { AllMoviesComponent } from './all-movies/all-movies.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
