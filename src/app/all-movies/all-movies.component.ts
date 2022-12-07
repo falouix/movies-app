@@ -8,6 +8,8 @@ import { Movie } from '../classes/movie';
 })
 
 export class AllMoviesComponent implements OnInit {
+  currentLength : number | any ;
+  less : any = false;
   movies: Movie[] | any;
   displayData: Movie[] | any;
   constructor(private movieService: MovieService) { }
@@ -15,6 +17,7 @@ export class AllMoviesComponent implements OnInit {
   isCritic : string ='';
   searchName :string ='' ;
   ngOnInit(): void {
+    
     this.movieService.getAllMovies(this.orderBy,this.isCritic).subscribe(result => {
       this.movies = result.results;
       this.movies.forEach(function(movie :any){
@@ -26,6 +29,7 @@ export class AllMoviesComponent implements OnInit {
         movie.reviewLink = movie.link.url
       });
       this.displayData = this.movies.slice(0, 10);
+      console.log(this.displayData);
     });
     
   }
@@ -75,8 +79,21 @@ export class AllMoviesComponent implements OnInit {
   }
   showMore() {
     let newLength = this.displayData.length + 10;
+    this.currentLength = newLength;
     if (newLength > this.movies.length) {
         newLength = this.movies.length
+    }else{
+      this.less = true
+    }
+     this.displayData = this.movies.slice(0, newLength);
+  }
+  showLess() {
+    console.log(this.currentLength);
+    let newLength = this.currentLength - 10;
+    if (newLength > 10) {
+        newLength = this.movies.length
+    }else{
+      this.less = false
     }
      this.displayData = this.movies.slice(0, newLength);
   }
