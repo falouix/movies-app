@@ -9,6 +9,7 @@ import { Movie } from '../classes/movie';
 
 export class AllMoviesComponent implements OnInit {
   movies: Movie[] | any;
+  displayData: Movie[] | any;
   constructor(private movieService: MovieService) { }
   orderBy : string ='by-publication-date';
   isCritic : string ='';
@@ -24,7 +25,9 @@ export class AllMoviesComponent implements OnInit {
         }
         movie.reviewLink = movie.link.url
       });
+      this.displayData = this.movies.slice(0, 10);
     });
+    
   }
   orderByChange(){
     this.movieService.getAllMovies(this.orderBy,this.isCritic).subscribe(result => {
@@ -42,6 +45,8 @@ export class AllMoviesComponent implements OnInit {
           movie.reviewLink = "#"
         }
       });
+      
+      this.displayData = this.movies.slice(0, 10);
     });
   }
   isCriticChange(){
@@ -65,7 +70,14 @@ export class AllMoviesComponent implements OnInit {
         }
         movie.reviewLink = movie.link.url
       });
+      this.displayData = this.movies.slice(0, 10);
     });
   }
-  
+  showMore() {
+    let newLength = this.displayData.length + 10;
+    if (newLength > this.movies.length) {
+        newLength = this.movies.length
+    }
+     this.displayData = this.movies.slice(0, newLength);
+  }
 }
